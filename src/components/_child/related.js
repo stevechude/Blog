@@ -3,7 +3,7 @@ import Link from "next/link";
 import Author from "./author";
 import Spinner from "./spinner";
 import Error from "./error";
-import Fetcher from "../../../lib/Fetcher";
+import Fetcher from "../../lib/Fetcher";
 
 function related() {
   const { data, isLoading, isError } = Fetcher("api/posts");

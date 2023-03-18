@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Author from "./_child/author";
-import Fetcher from "../../lib/Fetcher";
+import Fetcher from "../lib/Fetcher";
 import Spinner from "./_child/spinner";
 import Error from "./_child/error";
 

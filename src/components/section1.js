@@ -5,7 +5,7 @@ import Author from "./_child/author";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 
-import Fetcher from "../../lib/Fetcher";
+import Fetcher from "../lib/Fetcher";
 import Spinner from "./_child/spinner";
 import Error from "./_child/error";
 
