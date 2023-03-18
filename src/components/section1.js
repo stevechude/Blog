@@ -5,7 +5,7 @@ import Author from "./_child/author";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 
-import fetcher from "../../lib/fetcher";
+import Fetcher from "../../lib/Fetcher";
 import Spinner from "./_child/spinner";
 import Error from "./_child/error";
 
@@ -13,7 +13,7 @@ import Error from "./_child/error";
 import "swiper/css";
 
 function section1() {
-  const { data, isLoading, isError } = fetcher("api/trending");
+  const { data, isLoading, isError } = Fetcher("api/trending");
 
   if (isLoading) return <Spinner />;
   if (isError) return <Error />;

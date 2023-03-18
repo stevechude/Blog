@@ -3,10 +3,10 @@ import Link from "next/link";
 import Author from "./author";
 import Spinner from "./spinner";
 import Error from "./error";
-import fetcher from "../../../lib/fetcher";
+import Fetcher from "../../../lib/Fetcher";
 
 function related() {
-  const { data, isLoading, isError } = fetcher("api/posts");
+  const { data, isLoading, isError } = Fetcher("api/posts");
 
   if (isLoading) return <Spinner />;
   if (isError) return <Error />;

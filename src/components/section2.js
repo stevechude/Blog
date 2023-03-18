@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Author from "./_child/author";
 // import getPost from "../../lib/helper";
-import fetcher from "../../lib/fetcher";
+import Fetcher from "../../lib/Fetcher";
 import Spinner from "./_child/spinner";
 import Error from "./_child/error";
 
 function section2() {
   // getPost(3).then((res) => console.log(res));
   // console.log(process.env.baseURL);
-  const { data, isLoading, isError } = fetcher("api/posts");
+  const { data, isLoading, isError } = Fetcher("api/posts");
 
   if (isLoading) return <Spinner />;
   if (isError) return <Error />;

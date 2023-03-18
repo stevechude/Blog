@@ -3,7 +3,7 @@ import Author from "@/components/_child/author";
 import Image from "next/image";
 import Related from "@/components/_child/related";
 import getPost from "../../../lib/helper";
-import fetcher from "../../../lib/fetcher";
+import Fetcher from "../../../lib/Fetcher";
 import Spinner from "@/components/_child/spinner";
 import Error from "@/components/_child/error";
 import { useRouter } from "next/router";
@@ -12,7 +12,7 @@ import { SWRConfig } from "swr";
 function Page({ fallback }) {
   const router = useRouter();
   const { postId } = router.query;
-  const { data, isLoading, isError } = fetcher(`api/posts/${postId}`);
+  const { data, isLoading, isError } = Fetcher(`api/posts/${postId}`);
 
   if (isLoading) return <Spinner />;
   if (isError) return <Error />;
