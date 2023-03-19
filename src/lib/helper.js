@@ -1,4 +1,4 @@
-const baseURL = process.env.baseURL;
+const baseURL = "http://localhost:3000/";
 
 // endpoint: http://localhost:3000/api/posts
 export default async function getPost(id) {
