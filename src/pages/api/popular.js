@@ -1,4 +1,4 @@
-import data from "./data";
+import data from "../../../public/data.json";
 
 // /api/popular
 export default function handler(req, res) {

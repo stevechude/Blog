@@ -1,4 +1,4 @@
-import data from "./data";
+import data from "../../../public/data.json";
 
 // api/trending
 export default function handler(req, res) {
