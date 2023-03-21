@@ -2,16 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Author from "./_child/author";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Fetcher from "../lib/Fetcher";
-import Spinner from "./_child/spinner";
-import Error from "./_child/error";
 
-function section3() {
-  const { data, isLoading, isError } = Fetcher("api/popular");
-
-  if (isLoading) return <Spinner />;
-  if (isError) return <Error />;
-
+function section3({ data }) {
   return (
     <section className="container mx-auto md:px-15 py-16">
       <h1 className="font-bold text-4xl py-12 text-center">Most Popular</h1>
@@ -25,7 +17,7 @@ function section3() {
           },
         }}
       >
-        {data.map((value, index) => (
+        {data?.map((value, index) => (
           <SwiperSlide key={index}>
             <Post data={value} />
           </SwiperSlide>

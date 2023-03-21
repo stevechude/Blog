@@ -2,29 +2,19 @@ import Format from "@/layout/format";
 import Author from "@/components/_child/author";
 import Image from "next/image";
 import Related from "@/components/_child/related";
-import getPost from "../../lib/helper";
-import Fetcher from "../../lib/Fetcher";
-import Spinner from "@/components/_child/spinner";
-import Error from "@/components/_child/error";
-import { useRouter } from "next/router";
-import { SWRConfig } from "swr";
 
-function Page({ fallback }) {
-  const router = useRouter();
-  const { postId } = router.query;
-  const { data, isLoading, isError } = Fetcher(`api/posts/${postId}`);
-
-  if (isLoading) return <Spinner />;
-  if (isError) return <Error />;
-
+function Page({ data }) {
   return (
-    <SWRConfig value={{ fallback }}>
-      <Article {...data} />
-    </SWRConfig>
+    <>
+      <Article data={data} />
+    </>
   );
 }
 
-function Article({ title, img, subtitle, author, description }) {
+function Article({ data }) {
+  const post = data[0];
+
+  const { title, img, subtitle, author, description } = post;
   return (
     <Format>
       <section className="container mx-auto md:px-2 py-16 w-1/2">
@@ -49,7 +39,7 @@ function Article({ title, img, subtitle, author, description }) {
             {description || "No description"}
           </div>
         </div>
-        <Related />
+        <Related data={data} />
       </section>
     </Format>
   );
@@ -57,29 +47,31 @@ function Article({ title, img, subtitle, author, description }) {
 
 export default Page;
 
-export async function getStaticProps({ params }) {
-  const posts = await getPost(params.postId);
+export async function getStaticProps(context) {
+  const id = context?.params.postId;
+  const { Posts } = await import("/data/data.json");
+
+  const data = Posts.filter((post) => post.id == id);
 
   return {
     props: {
-      fallback: {
-        "api/posts": posts,
-      },
+      data,
     },
   };
 }
 
 export async function getStaticPaths() {
-  const posts = await getPost();
+  const { Posts } = await import("/data/data.json");
+  // console.log(Posts);
 
-  const paths = posts.map((value) => {
+  const paths = Posts.map((val) => {
     return {
       params: {
-        postId: value.id.toString(),
+        postId: val.id.toString(),
       },
     };
   });
-
+  // console.log(paths);
   return {
     paths,
     fallback: false,

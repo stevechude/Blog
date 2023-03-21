@@ -1,22 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import Author from "./author";
-import Spinner from "./spinner";
-import Error from "./error";
-import Fetcher from "../../lib/Fetcher";
 
-function related() {
-  const { data, isLoading, isError } = Fetcher("api/posts");
-
-  if (isLoading) return <Spinner />;
-  if (isError) return <Error />;
-
+function related({ data }) {
   return (
     <section className="pt-20">
       <h1 className="font-bold text-3xl py-10">Related</h1>
 
       <div className="flex flex-col gap-10">
-        {data.map((value, index) => (
+        {data?.map((value, index) => (
           <Post key={index} data={value} />
         ))}
       </div>
@@ -70,3 +62,13 @@ function Post({ data }) {
 }
 
 export default related;
+
+export async function getStaticProps() {
+  const { Posts } = await import("/data/data.json");
+
+  return {
+    props: {
+      data: Posts,
+    },
+  };
+}

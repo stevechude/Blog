@@ -1,13 +1,13 @@
-import data from "../../../../public/data.json";
+// import data from "../../../../public/data.json";
 
-export default function handler(req, res) {
-  const { postId } = req.query;
-  const { Posts } = data;
+// export default function handler(req, res) {
+//   const { postId } = req.query;
+//   const { Posts } = data;
 
-  if (postId) {
-    const post = Posts.find((val) => val.id == postId);
-    return res.status(200).json(post);
-  }
+//   if (postId) {
+//     const post = Posts.find((val) => val.id == postId);
+//     return res.status(200).json(post);
+//   }
 
-  return res.status(404).json({ error: "Post Not Found" });
-}
+//   return res.status(404).json({ error: "Post Not Found" });
+// }

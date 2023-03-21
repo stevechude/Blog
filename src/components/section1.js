@@ -5,19 +5,10 @@ import Author from "./_child/author";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 
-import Fetcher from "../lib/Fetcher";
-import Spinner from "./_child/spinner";
-import Error from "./_child/error";
-
 // Import Swiper styles
 import "swiper/css";
 
-function section1() {
-  const { data, isLoading, isError } = Fetcher("api/trending");
-
-  if (isLoading) return <Spinner />;
-  if (isError) return <Error />;
-
+function section1({ data }) {
   SwiperCore.use([Autoplay]);
 
   const bg = {
@@ -40,7 +31,7 @@ function section1() {
           //   onSlideChange={() => console.log("slide change")}
           //   onSwiper={(swiper) => console.log(swiper)}
         >
-          {data.map((value, index) => (
+          {data?.map((value, index) => (
             <SwiperSlide key={index}>
               <Slide data={value} />
             </SwiperSlide>

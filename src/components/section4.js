@@ -1,16 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import Author from "./_child/author";
-import Fetcher from "../lib/Fetcher";
-import Spinner from "./_child/spinner";
-import Error from "./_child/error";
 
-function section4() {
-  const { data, isLoading, isError } = Fetcher("api/popular");
-
-  if (isLoading) return <Spinner />;
-  if (isError) return <Error />;
-
+function section4({ data }) {
   return (
     <section className="container mx-auto md:px-15 py-16">
       <div className="grid lg:grid-cols-2">
